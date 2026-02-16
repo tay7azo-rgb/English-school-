@@ -1,1 +1,932 @@
-# English.language-
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easy English - رمضانيات تعليمية ذكية</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c19a6b;
+      --gold-soft: #e4c49b;
+      --brown: #3d2b1f;
+      --glass: rgba(255,255,255,0.12);
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: radial-gradient(circle at top, #4b3621 0%, #1a1a1a 45%, #000 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: white;
+      position: relative;
+    }
+
+    .ramadan-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.28;
+      pointer-events: none;
+    }
+
+    .ornament {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border: 2px solid var(--gold);
+      transform: rotate(45deg);
+      animation: float 18s infinite linear;
+    }
+
+    .ornament::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px solid var(--gold);
+    }
+
+    @keyframes float {
+      0% { transform: rotate(0deg) translate(0,0); }
+      50% { transform: rotate(180deg) translate(40px,80px); }
+      100% { transform: rotate(360deg) translate(0,0); }
+    }
+
+    .moon-glow {
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .glass-panel {
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 28px;
+      padding: 3rem 2.5rem;
+      width: 92%;
+      max-width: 760px;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+      transition: 0.4s;
+      position: relative;
+    }
+
+    .btn-main {
+      background: linear-gradient(to left, var(--gold), #8e6d45);
+      padding: 0.9rem 2.4rem;
+      border-radius: 999px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: white;
+      transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(193,154,107,0.35);
+      border: none;
+    }
+
+    .btn-main:hover {
+      transform: scale(1.04) translateY(-2px);
+      filter: brightness(1.15);
+      box-shadow: 0 10px 25px rgba(193,154,107,0.6);
+    }
+
+    .hidden-section { display: none; opacity: 0; transform: translateY(20px); }
+    .active-section { display: block; opacity: 1; transform: translateY(0); animation: fadeIn 0.6s forwards; }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .big-text {
+      font-size: 4.4rem;
+      font-weight: 900;
+      background: linear-gradient(to bottom, #fff, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: 0.3s;
+      word-break: break-word;
+    }
+
+    .loader {
+      width: 55px;
+      height: 55px;
+      border: 5px solid rgba(255,255,255,0.2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .back-btn {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      background: linear-gradient(to bottom right, var(--gold), #8e6d45);
+      color: #fff;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      cursor: pointer;
+      z-index: 40;
+      transform: translateY(120%);
+      opacity: 0;
+      transition: 0.35s;
+    }
+
+    .back-btn.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.8);
+    }
+
+    /* إيقاف الأنيميشن عند القواعد */
+    .no-anim .ornament {
+      animation: none !important;
+    }
+
+    /* تأثير تمزق الورقة */
+    .page-tear {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, #f5f5f5 0%, #d9d9d9 40%, #b3b3b3 100%);
+      z-index: 50;
+      pointer-events: none;
+      transform-origin: top center;
+      animation: tear 1.1s forwards;
+    }
+
+    @keyframes tear {
+      0% { transform: scaleY(0); opacity: 0; }
+      40% { transform: scaleY(1.05); opacity: 1; }
+      100% { transform: scaleY(0); opacity: 0; }
+    }
+
+    @media (max-width: 640px) {
+      .glass-panel {
+        padding: 2.2rem 1.6rem;
+        border-radius: 22px;
+      }
+      .big-text {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="moon-glow"></div>
+
+  <div class="ramadan-bg">
+    <div class="ornament" style="top: 8%; left: 8%;"></div>
+    <div class="ornament" style="bottom: 10%; right: 10%; animation-delay: -4s;"></div>
+    <div class="ornament" style="top: 55%; right: 20%; width: 90px; height: 90px; animation-duration: 14s;"></div>
+  </div>
+
+  <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-25">
+    <div class="absolute top-6 left-10 text-4xl animate-bounce">🕯️</div>
+    <div class="absolute top-10 right-12 text-3xl animate-pulse">🌙</div>
+    <div class="absolute bottom-10 left-1/4 text-3xl animate-bounce">🕯️</div>
+  </div>
+
+  <!-- شاشة البداية -->
+  <div id="start-screen" class="glass-panel active-section">
+    <h1 class="text-5xl font-black mb-4 text-[var(--gold)] tracking-widest">EASY ENGLISH</h1>
+    <p class="mb-2 text-sm opacity-70">تعلّم الإنجليزية بهدوء… حرفًا، صوتًا، كلمةً وجملةً</p>
+    <p class="mb-8 text-xs opacity-60">صفحة واحدة فقط • بدون إنترنت • أجواء رمضانية</p>
+    <button onclick="goToLoading()" class="btn-main">START</button>
+  </div>
+
+  <!-- شاشة التحميل -->
+  <div id="loading-screen" class="glass-panel hidden-section">
+    <div class="flex flex-col items-center">
+      <div class="loader mb-6"></div>
+      <h2 class="text-3xl font-bold tracking-widest text-[var(--gold)] mb-2">تحميل</h2>
+      <p class="text-sm opacity-70">يتم تجهيز الحروف والأصوات والكلمات والجمل…</p>
+    </div>
+  </div>
+
+  <!-- القائمة الرئيسية -->
+  <div id="main-menu" class="glass-panel hidden-section">
+    <h2 class="text-3xl font-bold mb-6 border-b border-[var(--gold)] pb-3">القائمة الرئيسية</h2>
+    <p class="text-sm opacity-70 mb-6">اختر القسم الذي تريد أن يبدأ العرض التلقائي منه:</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+      <button onclick="startLearning('abc')" class="btn-main w-full rounded-xl text-lg">قسم الحروف (ABC)</button>
+      <button onclick="startLearning('phonics')" class="btn-main w-full rounded-xl text-lg">قسم الأصوات (PHONICS)</button>
+      <button onclick="startLearning('words')" class="btn-main w-full rounded-xl text-lg">قسم الكلمات (WORDS)</button>
+      <button onclick="startLearning('sentences')" class="btn-main w-full rounded-xl text-lg">قسم الجمل (SENTENCES)</button>
+    </div>
+
+    <div class="mb-6">
+      <button onclick="openGrammar()" class="btn-main w-full rounded-xl text-lg bg-gradient-to-r from-[var(--gold)] to-[#d4af37]">
+        قواعد (GRAMMAR)
+      </button>
+    </div>
+
+    <!-- قسم المعلومات -->
+    <div class="mt-6 pt-4 border-t border-white/10">
+      <div class="mb-4">
+        <div class="text-2xl sm:text-3xl font-black text-[var(--gold)] drop-shadow-md">
+          تم إنشاء الموقع بواسطة جابر خبراني
+        </div>
+        <div class="mt-2 inline-block px-4 py-1 rounded-full bg-white/10 text-sm sm:text-base text-[var(--gold-soft)]">
+          أول متوسط / ب
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <div class="text-2xl sm:text-3xl font-black text-[var(--gold)] drop-shadow-md">
+          وتمت مساعدته بواسطة سامر عسيري
+        </div>
+        <div class="mt-2 inline-block px-4 py-1 rounded-full bg-gradient-to-r from-[var(--gold)]/20 to-transparent text-sm sm:text-base text-[var(--gold-soft)]">
+          أول متوسط / ب
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- منطقة التعلم العامة -->
+  <div id="learning-area" class="glass-panel hidden-section">
+    <div class="mb-4 text-xs opacity-70 flex justify-between">
+      <span id="mode-label">وضع: الحروف</span>
+      <span id="counter-label">1 / 26</span>
+    </div>
+
+    <div id="content-box" class="mt-2">
+      <div id="display-text" class="big-text">A</div>
+      <div id="sub-text" class="text-2xl text-gray-200 mt-3">أيه</div>
+    </div>
+
+    <div class="mt-8 flex flex-col gap-3 items-center text-sm">
+      <button id="toggle-btn"
+              class="px-6 py-2 rounded-full border border-[var(--gold-soft)] text-[var(--gold-soft)] hover:bg-[var(--gold-soft)] hover:text-black transition flex items-center gap-2">
+        <span id="toggle-icon">⏸</span>
+        <span id="toggle-text">إيقاف مؤقت</span>
+      </button>
+
+      <button id="smart-cycle-btn"
+              class="px-6 py-2 rounded-full border border-white/20 text-white/80 hover:bg-white/10 transition text-xs">
+        تفعيل / إيقاف التنقل الذكي بين الأقسام
+      </button>
+
+      <span class="opacity-60 text-center text-xs sm:text-sm">
+        العرض تلقائي، يتكيّف مع طول الكلمة أو الجملة، ويتكرر من البداية بعد الانتهاء
+      </span>
+    </div>
+  </div>
+
+  <!-- شاشة اختيار مستوى القواعد -->
+  <div id="grammar-levels" class="glass-panel hidden-section">
+    <h2 class="text-3xl font-bold mb-4 text-[var(--gold)]">قسم القواعد (GRAMMAR)</h2>
+    <p class="text-sm opacity-70 mb-6">
+      اختر المستوى المناسب، وسيبدأ شرح القواعد تلقائيًا مع أمثلة واضحة بالإنجليزية والعربية.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      <button onclick="startGrammar('beginner')" class="btn-main w-full rounded-xl text-lg bg-gradient-to-r from-green-500 to-emerald-600">
+        مبتدئ
+      </button>
+      <button onclick="startGrammar('intermediate')" class="btn-main w-full rounded-xl text-lg bg-gradient-to-r from-yellow-500 to-amber-600">
+        متوسط
+      </button>
+      <button onclick="startGrammar('advanced')" class="btn-main w-full rounded-xl text-lg bg-gradient-to-r from-red-500 to-rose-600">
+        صعب
+      </button>
+    </div>
+
+    <button onclick="closeGrammar()" class="text-xs opacity-70 hover:opacity-100 underline">
+      العودة إلى القائمة الرئيسية
+    </button>
+  </div>
+
+  <!-- شاشة شرح القواعد -->
+  <div id="grammar-learning" class="glass-panel hidden-section">
+    <div class="mb-3 text-xs opacity-70 flex justify-between">
+      <span id="grammar-level-label">قواعد: مبتدئ</span>
+      <span id="grammar-counter-label">1 / 10</span>
+    </div>
+
+    <div class="mt-2">
+      <div id="grammar-title" class="text-3xl font-black text-[var(--gold)] mb-3">
+        He / She / It
+      </div>
+      <div id="grammar-en" class="text-xl mb-2">
+        He is a boy. She is a girl. It is a cat.
+      </div>
+      <div id="grammar-ar" class="text-sm text-gray-200 leading-relaxed">
+        نستخدم He مع المذكر المفرد، She مع المؤنث المفرد، و It مع الأشياء أو الحيوانات.
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-3 items-center text-sm">
+      <button id="grammar-toggle-btn"
+              class="px-6 py-2 rounded-full border border-[var(--gold-soft)] text-[var(--gold-soft)] hover:bg-[var(--gold-soft)] hover:text-black transition flex items-center gap-2">
+        <span id="grammar-toggle-icon">⏸</span>
+        <span id="grammar-toggle-text">إيقاف مؤقت</span>
+      </button>
+
+      <button onclick="backToGrammarLevels()"
+              class="text-xs opacity-70 hover:opacity-100 underline">
+        العودة لاختيار المستوى
+      </button>
+
+      <span class="opacity-60 text-center text-xs sm:text-sm">
+        الشرح يتحرك تلقائيًا بين نقاط القاعدة مع أمثلة متنوعة.
+      </span>
+    </div>
+  </div>
+
+  <!-- زر العودة العائم -->
+  <button id="back-btn" class="back-btn" onclick="returnToMenu()">
+    <span class="text-xl">🌙</span>
+    <span>القائمة الرئيسية</span>
+  </button>
+
+  <!-- طبقة تمزق الورقة (تُضاف ديناميكياً) -->
+
+  <script>
+    /* ============================
+       بيانات الحروف والأصوات والكلمات
+       ============================ */
+
+    const letters = [
+      {en:'A', ar:'أيه'}, {en:'B', ar:'بي'}, {en:'C', ar:'سي'}, {en:'D', ar:'دي'}, {en:'E', ar:'إي'},
+      {en:'F', ar:'إف'}, {en:'G', ar:'جي'}, {en:'H', ar:'إتش'}, {en:'I', ar:'آي'}, {en:'J', ar:'جاي'},
+      {en:'K', ar:'كي'}, {en:'L', ar:'إل'}, {en:'M', ar:'إم'}, {en:'N', ar:'إن'}, {en:'O', ar:'أو'},
+      {en:'P', ar:'بي'}, {en:'Q', ar:'كيو'}, {en:'R', ar:'آر'}, {en:'S', ar:'إس'}, {en:'T', ar:'تي'},
+      {en:'U', ar:'يو'}, {en:'V', ar:'في'}, {en:'W', ar:'دبليو'}, {en:'X', ar:'إكس'}, {en:'Y', ar:'واي'},
+      {en:'Z', ar:'زد'}
+    ];
+
+    const phonics = [
+      {en:'SH', ar:'ش'}, {en:'CH', ar:'تش'}, {en:'TH', ar:'ث / ذ'}, {en:'PH', ar:'ف'}, {en:'TION', ar:'شن'},
+      {en:'OO', ar:'أو'}, {en:'EA', ar:'إي'}, {en:'OU', ar:'أو'}, {en:'AI', ar:'آي'}, {en:'OI', ar:'أوي'},
+      {en:'NG', ar:'نغ'}, {en:'AR', ar:'آر'}, {en:'ER', ar:'إر'}, {en:'OR', ar:'أور'}, {en:'UR', ar:'أر'}
+    ];
+
+    const nouns = [
+      {en:'book', ar:'كتاب'}, {en:'phone', ar:'هاتف'}, {en:'car', ar:'سيارة'}, {en:'door', ar:'باب'},
+      {en:'window', ar:'نافذة'}, {en:'table', ar:'طاولة'}, {en:'chair', ar:'كرسي'}, {en:'bag', ar:'حقيبة'},
+      {en:'key', ar:'مفتاح'}, {en:'bottle', ar:'زجاجة'}, {en:'pen', ar:'قلم'}, {en:'paper', ar:'ورقة'},
+      {en:'room', ar:'غرفة'}, {en:'light', ar:'ضوء'}, {en:'clock', ar:'ساعة'}, {en:'computer', ar:'حاسوب'},
+      {en:'tv', ar:'تلفاز'}, {en:'cup', ar:'كوب'}, {en:'plate', ar:'صحن'}, {en:'bed', ar:'سرير'},
+      {en:'pillow', ar:'وسادة'}, {en:'blanket', ar:'بطانية'}, {en:'shoes', ar:'حذاء'}, {en:'shirt', ar:'قميص'},
+      {en:'jacket', ar:'سترة'}, {en:'hat', ar:'قبعة'}, {en:'wallet', ar:'محفظة'}, {en:'watch', ar:'ساعة يد'},
+      {en:'glasses', ar:'نظارة'}
+    ];
+
+    const places = [
+      {en:'school', ar:'مدرسة'}, {en:'city', ar:'مدينة'}, {en:'home', ar:'منزل'}, {en:'market', ar:'سوق'},
+      {en:'hospital', ar:'مستشفى'}, {en:'airport', ar:'مطار'}, {en:'park', ar:'حديقة'}, {en:'mosque', ar:'مسجد'},
+      {en:'street', ar:'شارع'}, {en:'restaurant', ar:'مطعم'}, {en:'office', ar:'مكتب'}, {en:'kitchen', ar:'مطبخ'},
+      {en:'bathroom', ar:'حمام'}, {en:'garden', ar:'حديقة'}, {en:'supermarket', ar:'سوبرماركت'}
+    ];
+
+    const verbs = [
+      {en:'run', ar:'يجري'}, {en:'eat', ar:'يأكل'}, {en:'drink', ar:'يشرب'}, {en:'sleep', ar:'ينام'},
+      {en:'read', ar:'يقرأ'}, {en:'write', ar:'يكتب'}, {en:'walk', ar:'يمشي'}, {en:'drive', ar:'يقود'},
+      {en:'open', ar:'يفتح'}, {en:'close', ar:'يغلق'}, {en:'speak', ar:'يتحدث'}, {en:'listen', ar:'يستمع'},
+      {en:'study', ar:'يدرس'}, {en:'work', ar:'يعمل'}, {en:'play', ar:'يلعب'}, {en:'help', ar:'يساعد'},
+      {en:'cook', ar:'يطبخ'}, {en:'clean', ar:'ينظف'}, {en:'wait', ar:'ينتظر'}, {en:'call', ar:'يتصل'},
+      {en:'visit', ar:'يزور'}, {en:'learn', ar:'يتعلم'}, {en:'teach', ar:'يعلّم'}, {en:'buy', ar:'يشتري'},
+      {en:'sell', ar:'يبيع'}, {en:'smile', ar:'يبتسم'}, {en:'cry', ar:'يبكي'}, {en:'think', ar:'يفكر'}
+    ];
+
+    const adjectives = [
+      {en:'fast', ar:'سريع'}, {en:'slow', ar:'بطيء'}, {en:'happy', ar:'سعيد'}, {en:'sad', ar:'حزين'},
+      {en:'strong', ar:'قوي'}, {en:'weak', ar:'ضعيف'}, {en:'big', ar:'كبير'}, {en:'small', ar:'صغير'},
+      {en:'hot', ar:'حار'}, {en:'cold', ar:'بارد'}, {en:'beautiful', ar:'جميل'}, {en:'ugly', ar:'قبيح'},
+      {en:'easy', ar:'سهل'}, {en:'difficult', ar:'صعب'}, {en:'new', ar:'جديد'}, {en:'old', ar:'قديم'},
+      {en:'clean', ar:'نظيف'}, {en:'dirty', ar:'متسخ'}, {en:'rich', ar:'غني'}, {en:'poor', ar:'فقير'}
+    ];
+
+    const natureWords = [
+      {en:'sun', ar:'شمس'}, {en:'moon', ar:'قمر'}, {en:'star', ar:'نجمة'}, {en:'sky', ar:'سماء'},
+      {en:'rain', ar:'مطر'}, {en:'snow', ar:'ثلج'}, {en:'wind', ar:'رياح'}, {en:'fire', ar:'نار'},
+      {en:'earth', ar:'أرض'}, {en:'tree', ar:'شجرة'}, {en:'flower', ar:'زهرة'}, {en:'river', ar:'نهر'},
+      {en:'sea', ar:'بحر'}, {en:'mountain', ar:'جبل'}
+    ];
+
+    const animals = [
+      {en:'cat', ar:'قطة'}, {en:'dog', ar:'كلب'}, {en:'bird', ar:'طائر'}, {en:'fish', ar:'سمكة'},
+      {en:'horse', ar:'حصان'}, {en:'lion', ar:'أسد'}, {en:'tiger', ar:'نمر'}, {en:'camel', ar:'جمل'},
+      {en:'sheep', ar:'خروف'}, {en:'cow', ar:'بقرة'}, {en:'goat', ar:'ماعز'}, {en:'chicken', ar:'دجاجة'}
+    ];
+
+    const feelings = [
+      {en:'love', ar:'حب'}, {en:'fear', ar:'خوف'}, {en:'hope', ar:'أمل'}, {en:'anger', ar:'غضب'},
+      {en:'peace', ar:'سلام'}, {en:'joy', ar:'فرح'}, {en:'worry', ar:'قلق'}, {en:'pride', ar:'فخر'}
+    ];
+
+    const colors = [
+      {en:'red', ar:'أحمر'}, {en:'blue', ar:'أزرق'}, {en:'green', ar:'أخضر'}, {en:'black', ar:'أسود'},
+      {en:'white', ar:'أبيض'}, {en:'yellow', ar:'أصفر'}, {en:'purple', ar:'بنفسجي'}, {en:'brown', ar:'بني'},
+      {en:'orange', ar:'برتقالي'}, {en:'pink', ar:'وردي'}
+    ];
+
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    const words = [
+      ...nouns, ...places, ...verbs, ...adjectives,
+      ...natureWords, ...animals, ...feelings, ...colors
+    ].map(w => ({ en: capitalize(w.en), ar: w.ar }));
+
+    /* ============================
+       جمل منطقية (أكثر من 1000)
+       ============================ */
+
+    const simpleSubjects = [
+      {en:'I', ar:'أنا'},
+      {en:'You', ar:'أنت'},
+      {en:'He', ar:'هو'},
+      {en:'She', ar:'هي'},
+      {en:'We', ar:'نحن'},
+      {en:'They', ar:'هم'}
+    ];
+
+    const timePhrases = [
+      {en:'today', ar:'اليوم'},
+      {en:'every day', ar:'كل يوم'},
+      {en:'at night', ar:'في الليل'},
+      {en:'in the morning', ar:'في الصباح'},
+      {en:'in Ramadan', ar:'في رمضان'},
+      {en:'on Friday', ar:'يوم الجمعة'}
+    ];
+
+    const sentencePatterns = [
+      {
+        en: (s, v, o) => `${s.en} ${v.en} ${o.en}.`,
+        ar: (s, v, o) => `${s.ar} ${v.ar} ${o.ar}.`
+      },
+      {
+        en: (s, v, o, t) => `${s.en} ${v.en} ${o.en} ${t.en}.`,
+        ar: (s, v, o, t) => `${s.ar} ${v.ar} ${o.ar} ${t.ar}.`
+      },
+      {
+        en: (s, v, p) => `${s.en} ${v.en} at the ${p.en}.`,
+        ar: (s, v, p) => `${s.ar} ${v.ar} في الـ${p.ar}.`
+      },
+      {
+        en: (s, v, n) => `${s.en} like this ${n.en}.`,
+        ar: (s, v, n) => `${s.ar} يحب هذا الـ${n.ar}.`
+      }
+    ];
+
+    const sentences = [];
+
+    for (let i = 0; i < simpleSubjects.length; i++) {
+      for (let j = 0; j < verbs.length; j++) {
+        for (let k = 0; k < nouns.length; k++) {
+          if (sentences.length > 1100) break;
+          const s = simpleSubjects[i];
+          const v = verbs[j];
+          const n = nouns[k];
+          const t = timePhrases[(i + j + k) % timePhrases.length];
+          const p = places[(i + j + k) % places.length];
+          const pattern = sentencePatterns[(i + j + k) % sentencePatterns.length];
+
+          const en = pattern.en(s, v, n, t, p);
+          const ar = pattern.ar(s, v, n, t, p);
+
+          sentences.push({ en, ar });
+        }
+        if (sentences.length > 1100) break;
+      }
+      if (sentences.length > 1100) break;
+    }
+
+    const data = {
+      abc: letters,
+      phonics: phonics,
+      words: words,
+      sentences: sentences
+    };
+
+    /* ============================
+       بيانات القواعد (Grammar)
+       ============================ */
+
+    const grammarData = {
+      beginner: [
+        {
+          title: 'He / She / It',
+          en: 'He is a boy. She is a girl. It is a cat.',
+          ar: 'نستخدم He مع المذكر المفرد، She مع المؤنث المفرد، و It مع الأشياء أو الحيوانات.'
+        },
+        {
+          title: 'I / You / We / They',
+          en: 'I am a student. You are my friend. We are in class. They are happy.',
+          ar: 'I مع المتكلم، You مع المخاطب، We مع الجماعة التي تضم المتكلم، They مع الغائبين (جمع).'
+        },
+        {
+          title: 'Verb to be (am / is / are)',
+          en: 'I am, He is, She is, It is, We are, You are, They are.',
+          ar: 'am يأتي مع I فقط، is مع المفرد، are مع الجمع و You.'
+        },
+        {
+          title: 'This / That',
+          en: 'This is a book. That is a car.',
+          ar: 'This لشيء قريب، That لشيء بعيد.'
+        },
+        {
+          title: 'These / Those',
+          en: 'These are books. Those are cars.',
+          ar: 'These للجمع القريب، Those للجمع البعيد.'
+        }
+      ],
+      intermediate: [
+        {
+          title: 'Present Simple',
+          en: 'He plays football every day. They go to school on Monday.',
+          ar: 'نستخدم المضارع البسيط للأفعال المتكررة والحقائق العامة، مع إضافة s للفعل مع He / She / It.'
+        },
+        {
+          title: 'Adverbs of Frequency',
+          en: 'I always wake up early. She sometimes drinks tea.',
+          ar: 'كلمات مثل always, usually, sometimes, never تعبّر عن عدد تكرار الفعل.'
+        },
+        {
+          title: 'Countable / Uncountable',
+          en: 'I have two books. I drink some water.',
+          ar: 'الأسماء المعدودة يمكن عدّها (book/books)، وغير المعدودة مثل water, rice لا تُعد مباشرة.'
+        },
+        {
+          title: 'There is / There are',
+          en: 'There is a cat in the room. There are three chairs.',
+          ar: 'There is للمفرد، There are للجمع، وتستخدم لوصف وجود شيء في مكان.'
+        },
+        {
+          title: 'Can / Can\'t',
+          en: 'I can swim. She can\'t drive.',
+          ar: 'Can للتعبير عن القدرة، و Can\'t لعدم القدرة.'
+        }
+      ],
+      advanced: [
+        {
+          title: 'Present Perfect',
+          en: 'I have finished my homework. She has visited Makkah.',
+          ar: 'نستخدمه لحدث انتهى وله علاقة بالحاضر، مع Have/Has + التصريف الثالث للفعل.'
+        },
+        {
+          title: 'Past Continuous',
+          en: 'I was reading when he called.',
+          ar: 'نستخدمه لوصف فعل كان مستمرًا في الماضي عندما حدث فعل آخر.'
+        },
+        {
+          title: 'First Conditional',
+          en: 'If you study, you will pass.',
+          ar: 'نستخدمه للتعبير عن احتمال حقيقي في المستقبل: If + present, will + base verb.'
+        },
+        {
+          title: 'Comparatives / Superlatives',
+          en: 'Ali is taller than Omar. Sara is the smartest student.',
+          ar: 'taller للمقارنة بين اثنين، the smartest للأفضل بين مجموعة.'
+        },
+        {
+          title: 'Passive Voice (Basic)',
+          en: 'The door is opened. The food is cooked.',
+          ar: 'نستخدم المبني للمجهول عندما نهتم بالفعل نفسه أكثر من الفاعل.'
+        }
+      ]
+    };
+
+    /* ============================
+       عناصر DOM
+       ============================ */
+
+    const screens = {
+      start: document.getElementById('start-screen'),
+      loading: document.getElementById('loading-screen'),
+      menu: document.getElementById('main-menu'),
+      learning: document.getElementById('learning-area'),
+      grammarLevels: document.getElementById('grammar-levels'),
+      grammarLearning: document.getElementById('grammar-learning')
+    };
+
+    const displayText = document.getElementById('display-text');
+    const subText = document.getElementById('sub-text');
+    const modeLabel = document.getElementById('mode-label');
+    const counterLabel = document.getElementById('counter-label');
+    const toggleBtn = document.getElementById('toggle-btn');
+    const toggleIcon = document.getElementById('toggle-icon');
+    const toggleText = document.getElementById('toggle-text');
+    const backBtn = document.getElementById('back-btn');
+    const smartCycleBtn = document.getElementById('smart-cycle-btn');
+
+    const grammarLevelLabel = document.getElementById('grammar-level-label');
+    const grammarCounterLabel = document.getElementById('grammar-counter-label');
+    const grammarTitle = document.getElementById('grammar-title');
+    const grammarEn = document.getElementById('grammar-en');
+    const grammarAr = document.getElementById('grammar-ar');
+    const grammarToggleBtn = document.getElementById('grammar-toggle-btn');
+    const grammarToggleIcon = document.getElementById('grammar-toggle-icon');
+    const grammarToggleText = document.getElementById('grammar-toggle-text');
+
+    let currentInterval = null;
+    let currentMode = null;
+    let currentIndex = 0;
+    let isPlaying = true;
+    let smartCycle = false;
+    const modesOrder = ['abc', 'phonics', 'words', 'sentences'];
+
+    let grammarInterval = null;
+    let currentGrammarLevel = null;
+    let currentGrammarIndex = 0;
+    let grammarPlaying = true;
+
+    /* ============================
+       التنقل بين الشاشات العامة
+       ============================ */
+
+    function switchScreen(targetId) {
+      Object.values(screens).forEach(s => {
+        s.classList.remove('active-section');
+        s.classList.add('hidden-section');
+      });
+      screens[targetId].classList.remove('hidden-section');
+      screens[targetId].classList.add('active-section');
+
+      if (targetId === 'learning' || targetId === 'grammarLearning') {
+        backBtn.classList.add('show');
+      } else {
+        backBtn.classList.remove('show');
+      }
+    }
+
+    function goToLoading() {
+      switchScreen('loading');
+      setTimeout(() => switchScreen('menu'), 5000);
+    }
+
+    /* ============================
+       زمن العرض الذكي
+       ============================ */
+
+    function getSmartDelay(item) {
+      const base = 2500;
+      const extraPerChar = 80;
+      const text = (item.en + ' ' + item.ar) || '';
+      const length = text.length;
+      let delay = base + length * extraPerChar;
+      if (delay < 2500) delay = 2500;
+      if (delay > 7000) delay = 7000;
+      return delay;
+    }
+
+    /* ============================
+       حفظ واسترجاع آخر موضع
+       ============================ */
+
+    function saveProgress() {
+      if (!currentMode) return;
+      localStorage.setItem('easyEnglish_progress_' + currentMode, currentIndex.toString());
+    }
+
+    function loadProgress(mode) {
+      const val = localStorage.getItem('easyEnglish_progress_' + mode);
+      if (!val) return 0;
+      const num = parseInt(val, 10);
+      if (isNaN(num)) return 0;
+      const max = data[mode].length;
+      return Math.min(Math.max(num, 0), max - 1);
+    }
+
+    /* ============================
+       العرض العام (حروف/أصوات/كلمات/جمل)
+       ============================ */
+
+    function updateDisplay() {
+      const list = data[currentMode];
+      const item = list[currentIndex];
+
+      displayText.style.opacity = 0;
+      subText.style.opacity = 0;
+
+      setTimeout(() => {
+        displayText.textContent = item.en;
+        subText.textContent = item.ar;
+        displayText.style.opacity = 1;
+        subText.style.opacity = 1;
+      }, 200);
+
+      const total = list.length;
+      counterLabel.textContent = `${currentIndex + 1} / ${total}`;
+
+      currentIndex = (currentIndex + 1) % total;
+      saveProgress();
+
+      if (smartCycle && currentIndex === 0) {
+        const nextMode = getNextMode(currentMode);
+        startLearning(nextMode, true);
+      } else if (isPlaying) {
+        const delay = getSmartDelay(item);
+        clearTimeout(currentInterval);
+        currentInterval = setTimeout(updateDisplay, delay);
+      }
+    }
+
+    function getNextMode(mode) {
+      const idx = modesOrder.indexOf(mode);
+      if (idx === -1) return 'abc';
+      return modesOrder[(idx + 1) % modesOrder.length];
+    }
+
+    function startAuto() {
+      isPlaying = true;
+      toggleIcon.textContent = '⏸';
+      toggleText.textContent = 'إيقاف مؤقت';
+      clearTimeout(currentInterval);
+      const list = data[currentMode];
+      const item = list[Math.max(currentIndex - 1, 0)];
+      const delay = getSmartDelay(item || {en:'', ar:''});
+      currentInterval = setTimeout(updateDisplay, delay);
+    }
+
+    function stopAuto() {
+      isPlaying = false;
+      toggleIcon.textContent = '▶';
+      toggleText.textContent = 'تشغيل تلقائي';
+      clearTimeout(currentInterval);
+    }
+
+    function startLearning(mode, fromSmartCycle = false) {
+      currentMode = mode;
+      currentIndex = loadProgress(mode);
+
+      if (mode === 'abc') modeLabel.textContent = 'وضع: الحروف';
+      else if (mode === 'phonics') modeLabel.textContent = 'وضع: الأصوات';
+      else if (mode === 'words') modeLabel.textContent = 'وضع: الكلمات';
+      else modeLabel.textContent = 'وضع: الجمل';
+
+      switchScreen('learning');
+      clearTimeout(currentInterval);
+      isPlaying = true;
+      toggleIcon.textContent = '⏸';
+      toggleText.textContent = 'إيقاف مؤقت';
+      updateDisplay();
+    }
+
+    function returnToMenu() {
+      stopAuto();
+      stopGrammarAuto();
+      document.body.classList.remove('no-anim');
+      switchScreen('menu');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (isPlaying) stopAuto();
+      else startAuto();
+    });
+
+    smartCycleBtn.addEventListener('click', () => {
+      smartCycle = !smartCycle;
+      if (smartCycle) {
+        smartCycleBtn.textContent = 'التنقل الذكي بين الأقسام: مفعل';
+        smartCycleBtn.classList.add('bg-white/10');
+      } else {
+        smartCycleBtn.textContent = 'تفعيل / إيقاف التنقل الذكي بين الأقسام';
+        smartCycleBtn.classList.remove('bg-white/10');
+      }
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearTimeout(currentInterval);
+        clearTimeout(grammarInterval);
+      } else {
+        if (isPlaying && currentMode) startAuto();
+        if (grammarPlaying && currentGrammarLevel) startGrammarAuto();
+      }
+    });
+
+    /* ============================
+       قسم القواعد (Grammar)
+       ============================ */
+
+    function openGrammar() {
+      stopAuto();
+      document.body.classList.add('no-anim');
+
+      const tear = document.createElement('div');
+      tear.className = 'page-tear';
+      document.body.appendChild(tear);
+
+      setTimeout(() => {
+        document.body.removeChild(tear);
+        switchScreen('grammarLevels');
+      }, 1100);
+    }
+
+    function closeGrammar() {
+      document.body.classList.remove('no-anim');
+      switchScreen('menu');
+    }
+
+    function startGrammar(level) {
+      currentGrammarLevel = level;
+      currentGrammarIndex = 0;
+      grammarPlaying = true;
+      grammarToggleIcon.textContent = '⏸';
+      grammarToggleText.textContent = 'إيقاف مؤقت';
+
+      if (level === 'beginner') grammarLevelLabel.textContent = 'قواعد: مبتدئ';
+      else if (level === 'intermediate') grammarLevelLabel.textContent = 'قواعد: متوسط';
+      else grammarLevelLabel.textContent = 'قواعد: صعب';
+
+      switchScreen('grammarLearning');
+      updateGrammarDisplay();
+      startGrammarAuto();
+    }
+
+    function updateGrammarDisplay() {
+      const list = grammarData[currentGrammarLevel];
+      const item = list[currentGrammarIndex];
+
+      grammarTitle.style.opacity = 0;
+      grammarEn.style.opacity = 0;
+      grammarAr.style.opacity = 0;
+
+      setTimeout(() => {
+        grammarTitle.textContent = item.title;
+        grammarEn.textContent = item.en;
+        grammarAr.textContent = item.ar;
+        grammarTitle.style.opacity = 1;
+        grammarEn.style.opacity = 1;
+        grammarAr.style.opacity = 1;
+      }, 150);
+
+      const total = list.length;
+      grammarCounterLabel.textContent = `${currentGrammarIndex + 1} / ${total}`;
+
+      currentGrammarIndex = (currentGrammarIndex + 1) % total;
+    }
+
+    function getGrammarDelay(item) {
+      const base = 3500;
+      const extraPerChar = 60;
+      const text = (item.title + ' ' + item.en + ' ' + item.ar) || '';
+      let delay = base + text.length * extraPerChar;
+      if (delay < 3500) delay = 3500;
+      if (delay > 9000) delay = 9000;
+      return delay;
+    }
+
+    function startGrammarAuto() {
+      grammarPlaying = true;
+      grammarToggleIcon.textContent = '⏸';
+      grammarToggleText.textContent = 'إيقاف مؤقت';
+      clearTimeout(grammarInterval);
+
+      const list = grammarData[currentGrammarLevel];
+      const item = list[Math.max(currentGrammarIndex - 1, 0)];
+      const delay = getGrammarDelay(item || {title:'', en:'', ar:''});
+      grammarInterval = setTimeout(() => {
+        updateGrammarDisplay();
+        startGrammarAuto();
+      }, delay);
+    }
+
+    function stopGrammarAuto() {
+      grammarPlaying = false;
+      grammarToggleIcon.textContent = '▶';
+      grammarToggleText.textContent = 'تشغيل تلقائي';
+      clearTimeout(grammarInterval);
+    }
+
+    grammarToggleBtn.addEventListener('click', () => {
+      if (grammarPlaying) stopGrammarAuto();
+      else startGrammarAuto();
+    });
+
+    function backToGrammarLevels() {
+      stopGrammarAuto();
+      switchScreen('grammarLevels');
+    }
+  </script>
+</body>
+</html>
